@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: green;
+    font-family: 'Trajan Pro', 'Times New Roman', serif;
+}
+#player-hand{
+border: 2px solid orange;
+height: 50vh;
+width: 50%;
+}
+.card{
+    display: inline-block;
+    margin: 0.5rem;
+    box-shadow: 0px 0px 5px black;
+}

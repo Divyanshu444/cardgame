@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRICHINQO Single Player Rummy</title>
+  <link rel="stylesheet" href="static/css/board.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<style>
+  #modal-content::-webkit-scrollbar {
+      width: 10px; 
+  }
+  
+  #modal-content::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+  }
+  
+  #modal-content::-webkit-scrollbar-thumb {
+      background-color: #888; 
+      border-radius: 6px; 
+  }
+  
+  #modal-content::-webkit-scrollbar-thumb:hover {
+      background-color: #555; 
+  }
+  </style>
+<body>
+  <div class="welcome">
+    <center>
+      <br><br><br><br>
+      <img src="static/pics/cards/frichinqo logo 1 no da.png">
+    </center>
+  </div>
+  <div class="main-board">
+    <div class="board">
+      <div class="leader-board-container">
+        <center style="font-style:black;font-weight: 600;position: sticky;">
+          <h1 style="background-color: rgba(255, 0, 0, 0.678);color: white; padding: 5px; border: 1px solid black; border-radius: 5px; ">LEADERBOARD</h1>
+          <br>
+          <div class="tags" style="margin-top: 5px;">
+            <p style="background-color: rgba(10, 148, 182, 0.63);padding: 5px; color: rgb(51, 50, 50);">RANK</p>
+            <p style="background-color: gold;padding: 5px; color: rgb(51, 50, 50); ">NAME</p>
+            <p style="background-color: rgba(10, 182, 10, 0.63);padding: 5px; color: rgb(51, 50, 50);">SCORE</p>
+          </div>
+        </center>
+        <div class="right-main"></div>
+      </div>
+      <div class="sub-board">
+        <center>
+          <div class="controls">
+            <div class="controlBtn">
+              <div class="tag-container"><b>
+                  <div class="tag-contain"><u>Draw Pile</u></div>
+                </b><br>
+                <div id="drawCard" class="action-button"></div>
+              </div>
+              <div class="tag-container"><b><u>Discard Pile</u>
+                  <p id="discardedPileCalculation"></p>
+                </b><br>
+                <div id="discard-pile"></div>
+              </div>
+            </div>
+          </div>
+        </center>
+        </span>
+        <center>
+          <div class="instruct"> Take 1 card from the drawing pile by clicking it. Click and draw the 11th card onto the
+            discard pile.</div>
+          <div id="player-hand" onclick="selectCard(event)"></div>
+          <center>
+            <div class="alert"></div>
+          </center>
+          <div class=" buttons">
+            <button class="action-button" id="declare-winner">Declare Winner</button>
+            <button id="restartGame">Restart Game</button>
+          </div>
+          <div class=" rule-button-container">
+            <button class="rule-button" id="open-modal-button">RULES</button>
+            <!-- <button class="rule-button" onclick="openRulesPopup()" class="btn btn-primary">RULES</button> -->
+          </div>
+      </div>
+
+    <!-- </div>
+     <div class="bottom-main" class="comment-section">
+      <input type="text" class='comment-text' name="reply" placeholder="Share Your Experience With Me..!"
+        maxlength="500">
+      <button onclick="sendComment()" id="btn-send">Send</button>
+    </div>  -->
+  </div>
+  </div>
+   <!-- Modal -->
+   <div id="modal-container">
+    <div id="modal-content">
+        <span id="close-modal">&times;</span>
+        <h2>Rummy Game Rules</h2>
+        <h4>Beta Version:</h4>
+        <p>The game is currently in the Beta phase as we work diligently to address and resolve any bugs for a
+          seamless gaming experience.</p>
+
+        <h4>Gameplay Overview:</h4>
+        <p>As you engage in Single-Player Rummy, a skill-based game, you'll experience strategic play, real-time
+          updates, and daily tournaments with crypto prizes. The currency used in the tournaments is virtual.</p>
+
+        <h4>Objective:</h4>
+        <p>Your goal is to build a Meld with the 10 cards you are dealt. Draw a card from the deck and discard one
+          from your hand until you have 10 Meld cards. The eleventh card is then discarded to end the game.</p>
+
+        <h4>Declare Winner:</h4>
+        <p>Click the "Declare Winner" button after achieving a winning hand. Discard the 11th card to finalize your
+          victory. If an error occurs and there's no Winner Hand, the game is lost, and you can restart.</p>
+
+        <h4>Leaderboard Scoring:</h4>
+        <p>Track the number of cards in the discard pile. The Leaderboard considers the lowest number of cards in the
+          discard pile as the winning criterion. After each tournament, the player with the fewest discarded cards
+          emerges victorious.</p>
+
+        <h4>Discard Pile Display:</h4>
+        <p>At any time, the discard pile shows the number of discarded cards, providing transparency and insight into
+          the competition.</p>
+
+        <h4>Accepted Melds:</h4>
+        <p>Melds can be either runs or sets. A run, such as A-2-3 or 8-9-10, must be in the same suit. Sets, like
+          J-J-J-J, can have a minimum of 3 cards and a maximum of 4 cards.</p>
+
+        <h4>Card Ranks Clarification:</h4>
+        <p>Card ranks include Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, and King. Note that runs like
+          Ace-King-Queen are not valid, and Ace is exclusively used as 1.</p>
+
+        <h4>Tournament Participation:</h4>
+        <p>Players can engage in multiple games during a daily tournament, enhancing their chances of securing a
+          position in the Prize ranks.</p>
+
+        <h4>Anti-Abuse Measures:</h4>
+        <p>Delays are implemented to prevent frequent game restarts. The restart button becomes clickable
+          approximately 90 seconds after a game starts, and the "Declare Winner" button appears after a similar delay.
+          Please refrain from refreshing the browser to maintain fair play.</p>
+
+        <h4>Bug Reporting and Disputes:</h4>
+        <p>If you encounter any bugs, feel free to report them. In the event of disputes, decisions made by us will be
+          final and binding.</p>
+
+        <h4>Enjoy the Game and Good Luck!</h4>
+    </div>
+</div>
+  
+  <script src="static/js/index.js"></script>
+</body>
+
+</html>

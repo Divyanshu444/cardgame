@@ -1,0 +1,7 @@
+document.getElementById('open-modal-button').addEventListener('click', function () {
+  document.getElementById('modal-container').style.display = 'flex';
+});
+
+document.getElementById('close-modal').addEventListener('click', function () {
+  document.getElementById('modal-container').style.display = 'none';
+});

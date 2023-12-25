@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="static/css/login.css">
+</head>
+
+<body>
+    <div class="main">
+        <center>
+            <div class="alert">
+                <h1 id="disp-time"></h1>
+                <h1></h1>
+                <center>
+                    
+                   <p>This message is only for players who are trying <br>
+                    to gain access over the fair players</p>
+                    <span style="color: black;" id="warn">Please do not refresh the game to gain an advantage over other players <br>
+                    getting faster hand than 90 seconds.it will always bring you back here. </span>
+                   
+                </center>
+            </div>
+        </center>
+        <div class="wrapper">
+            <div class="img">
+                <h1 id="log-head"> Fill To Login </h1>
+            </div><br>
+            <div class="capture" id="log-form">
+                <div class="sub">
+                    <label>
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="username" placeholder="Enter Username" maxlength="8">
+                    </label>
+                    <center><span id="name-err"></span></center>
+                    <label>
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Enter Email">
+                    </label>
+                    <center><span id="email-err"></span></center>
+                    <button id="submit">Submit</button>
+                    <center><span id="err"></span></center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let times = Number(localStorage.getItem('times'));
+        if (times != null) {
+            window.addEventListener('DOMContentLoaded', () => {
+                let key = localStorage.getItem('times');
+                if (key == 1) {
+                    document.querySelector('h1').innerHTML = `Your ${key || 1}st Form`;
+
+                } if (key == 2) {
+                    document.querySelector('h1').innerHTML = `Your ${key || 1}nd Form`;
+                }
+                if (key == 3) {
+                    document.querySelector('h1').innerHTML = `Your ${key || 1}rd Form`;
+
+                }
+                if (key > 3) {
+                    document.querySelector('h1').innerHTML = `Your ${key || 1}th Form`;
+
+                }
+                localStorage.setItem('times', times += 1);
+            });
+
+        }
+        // Alert Box
+        let msg = Number(localStorage.getItem('msg'));
+        if (msg != null) {
+            window.addEventListener('DOMContentLoaded', () => {
+                let key = localStorage.getItem('msg');
+                if (key == 1) {
+                  document.querySelector('p');
+                  document.getElementById('warn');
+
+                } if (key == 2) {
+                    document.querySelector('p');
+                    document.getElementById('warn');
+                }
+                if (key == 3) {
+                    document.querySelector('p');
+                    document.getElementById('warn');
+
+                }
+                if (key > 3) {
+                    document.querySelector('p');
+                    document.getElementById('warn');
+                }
+                localStorage.setItem('msg', msg += 1);
+            });
+        }
+
+        //   Timer
+        let timeRemaining = 90; // 90 seconds
+        
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeRemaining / 60);
+  const seconds = timeRemaining ;
+  const formattedTime = `${String(seconds)}`;
+  document.getElementById('disp-time').innerText = formattedTime;
+}
+
+function updateTimer() {
+  updateTimerDisplay();
+
+  if (timeRemaining > 0) {
+    timeRemaining--;
+    document.getElementById('log-form').style.display="none";
+    document.getElementById('log-head').style.display=`none`;
+  }else if( timeRemaining==0) {
+    // Timer reached 0, hide the timer
+    document.getElementById('disp-time').style.display = 'none';
+    document.getElementById('log-form').style.display= 'block';
+    document.getElementById('log-head').style.display=`block`;
+  }else{
+    document.getElementById('disp-time').style.display = 'none';
+  }
+}
+
+// Update the timer every second
+setInterval(updateTimer, 1000);
+    </script>
+    <style>
+        .alert {
+            background-color: yellow;
+            text-align: center;
+            padding: 15px;
+            font-weight: 900;
+            border-radius: 10px;
+
+
+        }
+
+        @media screen and (max-width:700px) {
+            .alert {
+                margin-left: 1rem;
+            }
+        }
+    </style>
+    <script src="static/js/login.js"></script>
+</body>
+
+</html>

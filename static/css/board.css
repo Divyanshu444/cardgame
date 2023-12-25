@@ -1,0 +1,560 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    /* background-color: green; */
+    background-image: url(/static/pics/bg.webp);
+    background-size: cover;
+    
+}   
+
+div,
+button {
+    cursor: pointer;
+}
+
+.rank-name-score {
+    margin-right: 10px;
+}
+
+.welcome {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: animateWelcome 0.5s 1 linear;
+    background-color: rgb(255, 255, 255);
+    display: none;
+    justify-content: center;
+    place-items: center;
+}
+
+.welcome img {
+    width: auto;
+    height: 5rem;
+    border-radius: 10px;
+    animation: increaseWidth 5s ease-out;
+}
+
+@keyframes increaseWidth {
+    0% {
+        opacity: 0%;
+    }
+
+    1% {
+        opacity: 5%;
+    }
+
+    2% {
+        opacity: 10%;
+    }
+
+    3% {
+        opacity: 15%;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background-color: #f2f2f200;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2195f300;
+    border-radius: 0px;
+}
+
+::-moz-scrollbar-thumb {
+    background-color: #2195f300;
+    border-radius: 0px;
+}
+
+.main-board {
+    height: 100vh;
+    width: 100%;
+}
+
+.board {
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.sub-board {
+    width: 80%;
+    height: auto;
+    margin-left: 1rem;
+}
+
+#player-hand {
+    height: 30vh;
+    overflow: auto;
+    width: 100%;
+}
+
+.card {
+    height: 40%;
+    width: auto;
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.selected {
+    border: 2px solid goldenrod;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    height: 40%;
+}
+
+.leader-board-container {
+    width: 30%;
+    height: 80vh;
+    padding: 20px;
+    /* overflow-y: auto;
+    overflow-x: hidden; */
+    border: 2px solid #333;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    
+}
+
+.right-main {
+    width: 100%;
+    height: 85%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 5px solid rgb(0, 0, 0);
+    background-color: #fff;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+}
+
+button {
+    padding: 10px;
+    border: 2px solid goldenrod;
+    border-radius: 10px;
+    background-color: brown;
+    color: #fff;
+    margin-left: 1rem;
+}
+
+.rule-button-container {
+    margin: 2rem;
+}
+
+.rule-button {
+    padding: 10px;
+    border: 2px solid goldenrod;
+    border-radius: 10px;
+    background-color: yellow;
+    color: black;
+    margin-left: 1rem;
+}
+
+.main-rank-frame {
+    border-bottom: 0.6px solid black;
+    display: flex;
+    align-items: center;
+    /* To vertically center content */
+    justify-content: space-between;
+    /* Distribute space between child elements */
+    margin-bottom: 10px;
+    /* Optional: Add margin to separate each frame */
+}
+
+.user-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 5rem;
+    border: 1px solid black;
+    display: grid;
+    place-items: center;
+}
+
+.user-country {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 3rem;
+    border: 1px solid black;
+    display: grid;
+    place-items: center;
+}
+
+.user-rank {
+    width: 3rem;
+    border: 1px solid black;
+
+}
+
+.bottom-main {
+    display: flex;
+    justify-content: left;
+    place-items: left;
+}
+
+.comment-text {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: brown;
+    border: 2px solid goldenrod;
+    color: #fff;
+    outline: none;
+}
+
+.comment-text::placeholder {
+    color: #fff;
+}
+
+.comment-section input[type="submit"] {
+    background-color: brown;
+    color: #fff;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid goldenrod;
+    padding: 0.5rem 1rem;
+
+}
+
+.instruct {
+    margin: 1rem;
+    background-color: black;
+    color: gold;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+b {
+    color: gold;
+}
+
+.alert {
+    color: gold;
+}
+
+#btn-send {
+    background-color: brown;
+    border: 2px solid goldenrod;
+    padding: 10px;
+    color: gold;
+}
+
+.controls div {
+    margin-left: 3%;
+}
+
+.tag-container {
+    height: 30vh;
+    width: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+}
+
+.tag-contain {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20%;
+}
+
+#drawCard {
+    height: 100%;
+    width: 80%;
+    background-image: url('/static/pics/cards/back card big FUN icon.png');
+    background-size: cover;
+    border-radius: 0.5rem;
+    border: 2px solid #fff;
+    display: flex;
+    color: black;
+    justify-content: center;
+    place-items: center;
+}
+
+#discard-pile {
+    height: 100%;
+    width: 80%;
+    border-radius: 0.5rem;
+    border: 2px solid #fff;
+}
+
+#discard-pile .card {
+    height: 100%;
+    width: 100%;
+}
+
+.controlBtn {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.discard-card-button {
+    background-color: brown;
+    border: 2px solid goldenrod;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    padding: 1rem;
+    color: #fff;
+    border-radius: 0.5rem;
+}
+
+.pointer-cursor {
+    position: cursor;
+}
+
+.tags {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .main-board {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        height: 100vh;
+        margin-bottom: 2%;
+        overflow: auto;
+    }
+
+    .board {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sub-board {
+        width: 100%;
+
+        max-width: 55vh;
+
+        margin: 0 auto;
+
+    }
+
+    .leader-board-container {
+        height: 30vh;
+        width: 100%;
+        overflow: auto;
+        border: none;
+        border-radius: 0rem;
+    }
+
+    .right-main {
+        height: 30vh;
+        width: 50vh;
+        overflow: auto;
+        border: none;
+        border: 1.5px solid black;
+    }
+
+    .tag-container {
+        height: 25vh;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        place-items: center;
+    }
+
+    #player-hand {
+        width: 100%;
+        height: 20vh;
+        overflow: auto;
+    }
+
+    .card {
+        height: 50%;
+        width: auto;
+        margin: 0;
+        margin-left: 1%;
+        display: inline;
+    }
+
+    #drawCard {
+        width: 80%;
+        height: 100%
+    }
+
+    #discard-pile {
+        width: 80%;
+        height: 100%
+    }
+
+    .main-rank-frame {
+        width: auto;
+    }
+
+    .main-rank-frame div {
+        border: none;
+    }
+
+    .user-name {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 5rem;
+        display: grid;
+        place-items: center;
+    }
+
+    .user-country {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 3rem;
+        display: grid;
+        place-items: center;
+    }
+
+    .user-rank {
+        width: 3rem;
+
+    }
+
+    .bottom-main {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 3rem;
+        margin: 3rem;
+    }
+
+    button {
+        padding: 0.8rem;
+        display: inline-block;
+    }
+
+    .controls {
+        display: flex;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .controls button {
+        padding: 10px;
+        height: auto;
+        width: auto;
+        border: 2px solid goldenrod;
+        background-color: brown;
+        color: #fff;
+        margin: 1px;
+        display: inline-block;
+    }
+
+    .comment-text {
+        width: 80%;
+        margin-left: 0rem;
+    }
+
+    #btn-send {
+        background-color: brown;
+        border: 2px solid goldenrod;
+        padding: 10px;
+    }
+
+    .selected {
+        border: 2px solid goldenrod;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        height: 60%;
+    }
+
+    .controlBtn {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    
+
+}
+
+
+#modal-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 500px;
+    height: 400px;
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#close-modal {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #dbcfcf;
+    background-color: red;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#modal-content h2{
+    margin-top: 1rem;
+    padding: 10px;
+}
+
+#modal-content h4{
+    margin-top: 6px;
+    padding: 10px;
+}
+#modal-content p{
+    padding: 10px;
+}
+
+
+

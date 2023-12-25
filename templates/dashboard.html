@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="deleteAll()">
+        Delete ALL
+    </button>
+
+    <button onclick="createNew">Create</button>
+    <script>
+        //Drop database from this
+        function deleteAll() {
+            let auth = prompt("Enter Password")
+            if (auth) {
+                fetch('/deleteAll?key=' + encodeURIComponent(JSON.stringify({ key: auth })))
+                    .then(response => response.json())  // Corrected line: Call json() method
+                    .then(data => {
+                        alert(data);
+                    })
+                    .catch(err => {
+                        alert(err);
+                    });
+            }
+        }
+        function sendLeaveRequest() {
+            const serverEndpoint = '/leaveServer';
+          
+            const cookieValue = getCookieValue('user_id');
+          
+            fetch(serverEndpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                user: cookieValue,
+                action: 'leave',
+              }),
+            })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(data => {
+              alert('New Game Created.')
+            })
+            .catch(error => {
+              console.error('Error sending leave request:', error);
+            });
+          }
+          window.addEventListener('beforeunload', () => {
+            localStorage.clear();
+            sendLeaveRequest();
+          });
+          window.addEventListener('unload', () => {
+            localStorage.clear();
+            sendLeaveRequest();
+          });          
+    </script>
+    <h1>User Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.country }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Comment Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Text</th>
+                <th>User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{ comment.text }}</td>
+                <td>{{ comment.user_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>User Scores</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_id, score in user_scores.items() %}
+            <tr>
+                <td>{{ user_id }}</td>
+                <td>{{ score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Connections List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_id in connections_list %}
+            <tr>
+                <td>{{ user_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

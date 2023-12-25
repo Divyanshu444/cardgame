@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login As Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+<style>
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    form {
+        background-color: #f2f2f2;
+        padding: 1.25rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="password"] {
+        width: 100%;
+        padding: 0.625rem;
+        margin-bottom: 0.9375rem;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+    }
+
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 0.625rem 0.9375rem;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+        }
+    }
+</style>
+
+<body>
+    <div class="main">
+        <form method="post" action="/admin_auth">
+            <input type="password" name="pw" placeholder="Your Pass Name">
+            <input type="submit" value="submit">
+        </form>
+    </div>
+</body>
+
+</html>
